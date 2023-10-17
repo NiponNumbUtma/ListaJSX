@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import Checkboxes from "../components/Checkbox";
 
 function Todo() {
   const inputRef = useRef(null);
@@ -13,6 +14,12 @@ function Todo() {
       inputRef.current.value = "";
     }
   };
+
+  const [checked, setChecked]=useState(false)
+
+    const handleChecked = () => {
+        setChecked(!checked)
+    }
 
   const deleteTask = (index) => {
     const updatedTasks = [...tasks];
@@ -42,20 +49,23 @@ function Todo() {
       <div>
         <h2 style={{color:"yellow"}}>Lista</h2>
         <ul>
+          
           {tasks.map((task, index) => (
             <li key={index}>
               {editingIndex === index ? (
                 <>
+                
                   <input
-                    type="text"
                     value={editingText}
                     onChange={(e) => setEditingText(e.target.value)}
                   />
+                  
                   <button onClick={() => saveTask(index)} style={{color:"blue"}}>Guardar</button>
                 </>
               ) : (
                 <>
-                  {task}
+                <Checkboxes></Checkboxes>
+                {task}
                   <button onClick={() => deleteTask(index)} style={{color:"red"}}>Eliminar</button>
                   <button onClick={() => editTask(index)} style={{color:"aliceblue"}}>Actualizar</button>
                 </>
