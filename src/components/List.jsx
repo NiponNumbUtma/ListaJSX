@@ -1,20 +1,21 @@
 import React, { useRef, useState, useEffect, Component } from 'react';
 import Checkboxes from "../components/Checkbox";
-
+import ApiRoute, {UrlApi}from '../ApiUrl/Api';
 function Todo() {
   const inputRef = useRef(null);
   const [tasks, setTasks] = useState([]); 
+  //const api = ApiRoute(UrlApi);
   const [editingIndex, setEditingIndex] = useState(null); 
   const [editingText, setEditingText] = useState(""); 
 
 
 
-  //Dependency list is null will execute once 
+  //Dependency list is null will execute once //Profe estaba probando hacerlo como angular pero ya vi que si es un poco diferente talvez o algo se me esta pasando por eso lo deje comentado
   useEffect(()=>{
-    console.log("init")
-    return () =>{
-      console.log("return")
-    }
+   /* const UrlApi = fetch("https://jsonplaceholder.typicode.com/todos/1").then((response) => response.json()).then((data) => {
+      console.log(data)
+})*/
+   console.log(ApiRoute)
   },[])
 
   const addTask = () => {
