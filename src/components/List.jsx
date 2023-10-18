@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, Component } from 'react';
 import Checkboxes from "../components/Checkbox";
 
 function Todo() {
@@ -6,6 +6,16 @@ function Todo() {
   const [tasks, setTasks] = useState([]); 
   const [editingIndex, setEditingIndex] = useState(null); 
   const [editingText, setEditingText] = useState(""); 
+
+
+
+  //Dependency list is null will execute once 
+  useEffect(()=>{
+    console.log("init")
+    return () =>{
+      console.log("return")
+    }
+  },[])
 
   const addTask = () => {
     const taskText = inputRef.current.value;
@@ -23,7 +33,7 @@ function Todo() {
 
     const deleteTo_do = (index) =>{
       const deleteTasks = [tasks];
-      deleteTasks.splice(checked);
+      deleteTasks.splice(index);
       setTasks(deleteTasks);
     }
   const deleteTask = (index) => {
@@ -78,12 +88,12 @@ function Todo() {
                   
                   <button onClick={() => saveTask(index)} style={{color:"blue"}}>Guardar</button>
                   
+                  
                 </>
               ) : (
                 <>
-                <Checkboxes></Checkboxes>
-                <h1>{task}</h1>
-                  <button onClick={() => deleteTask(index)} style={{color:"red"}}><span>Eliminar</span></button>
+                <Checkboxes></Checkboxes>{task}
+                  <button onClick={() => deleteTask(index)} style={{color:"red"}}>Eliminar</button>
                   <button onClick={() => editTask(index)} style={{color:"aliceblue"}}>Actualizar</button>
                 </>
               )}
